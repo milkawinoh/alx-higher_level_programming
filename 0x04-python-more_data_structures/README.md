@@ -1,1 +1,1 @@
-python:y
+python
