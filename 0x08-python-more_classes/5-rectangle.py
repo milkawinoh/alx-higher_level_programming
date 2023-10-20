@@ -1,9 +1,8 @@
-#!/usr/bin/python3
 class Rectangle:
     """no imported module"""
     def __init__(self, width=0, height=0):
-        self.width = width
-        self.height = height
+        self.__width = width
+        self.__height = height
 
     @property
     def width(self):
@@ -20,7 +19,7 @@ class Rectangle:
     @property
     def height(self):
         return self.__height
-    
+
     @height.setter
     def height(self, value):
         if not isinstance(value, int):
@@ -31,7 +30,19 @@ class Rectangle:
 
     def area(self):
         return self.__height * self.__width
-    
+
     def perimeter(self):
-        result = 2 * (self.__width + self.__height)
-        return result
+        return 2 * (self.__width + self.__height)
+
+    def __str__(self):
+        v = ""
+        for _ in range(self.__height):
+            v += "#" * self.__width
+            v += "\n"
+        return v
+
+    def __repr__(self):
+        return "Rectangle({}, {})".format(self.__width, self.__height)
+
+    def __del__(self):
+        print("Bye rectangle...")
