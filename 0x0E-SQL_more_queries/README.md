@@ -102,5 +102,6 @@ mysql>
 mysql> quit
 Bye
 $
+
 ```
 
