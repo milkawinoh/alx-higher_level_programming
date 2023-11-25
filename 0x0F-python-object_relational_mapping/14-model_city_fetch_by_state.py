@@ -1,16 +1,18 @@
 #!/usr/bin/python3
 """
-a script that lists all State objects that contain the letter a from the database hbtn_0e_6_usa
+This script prints all City objects
+from the database `hbtn_0e_14_usa`.
 """
 
 from sys import argv
 from model_state import State, Base
+from model_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 if __name__ == "__main__":
     """
-    Access to the database and get the states
+    Access to the database and get the cities
     from the database.
     """
 
@@ -21,11 +23,11 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
 
     session = Session()
-    state_name = argv[4]
-    instances = session.query(State).filter(State.name.like(f'%{state_name}%')).all()
-    if instances:
-        for instance in instances:
-            print(instance.id)
-    else:
-        print("Not found")
+
+    results = session.query(City, State).join(State)
+
+    for city, state in results.all():
+        print("{}: ({}) {}".format(state.name, city.id, city.name))
+
+    session.commit()
     session.close()
