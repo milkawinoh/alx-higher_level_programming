@@ -1,24 +1,25 @@
-ef find_peak(list_of_integers):
+def find_peak(list_of_integers):
     """
-    Find a peak in a list of unsorted integer using binary search tree approach.
+    Find a peak in an unsorted list of integers.
 
     Args:
-    - list_of_integers: A list of unsorted integers.
+        list_of_integers (list): Unsorted list of integers.
 
     Returns:
-    - A peak element.
+        int | None: Peak element.
     """
     if not list_of_integers:
         return None
 
-    low, high = 0, len(list_of_integers) - 1
+    left, right = 0, len(list_of_integers) - 1
 
-    while low < high:
-        mid = (low + high) // 2
+    while left < right:
+        mid = (left + right) // 2
 
-        if list_of_integers[mid] > list_of_integers[mid + 1]:
-            high = mid
+        # Compare mid with its neighbors
+        if list_of_integers[mid] < list_of_integers[mid + 1]:
+            left = mid + 1
         else:
-            low = mid + 1
+            right = mid
 
-    return list_of_integers[low]
+    return list_of_integers[left]
